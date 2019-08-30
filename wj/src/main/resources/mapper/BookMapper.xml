@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.gm.wj.dao.BookMapper">
+    <sql id="bookColumn">
+      b.id,b.cover,b.title,b.author,b.createDate,b.press,b.abs,b.cid,c.name
+    </sql>
+
+    <select id="findAll" resultType="Book">
+        SELECT <include refid="bookColumn"/> FROM book b
+        INNER JOIN category c ON b.cid = c.id
+        ORDER BY createDate DESC
+    </select>
+
+    <insert id="save" parameterType="Book">
+      INSERT INTO book VALUES
+      (#{cover},#{title},#{author},NOW(),#{press},#{abs},#{cid})
+    </insert>
+
+    <update id="update" parameterType="Book">
+        UPDATE book
+        <set>
+            <if test="cover !=null and cover != ''">
+              cover=#{cover},
+            </if>
+            <if test="title!=null and title!=''">
+                title=#{title},
+            </if>
+            <if test="author!=null and author !=''">
+                author=#{author},
+            </if>
+                createDate=NOW(),
+            <if test="press!=null and press !=''">
+                press=#{press},
+            </if>
+            <if test="abs!=null and abs !=''">
+                abs=#{abs},
+            </if>
+            <if test="cid!=null and cid &gt;0">
+                cid=#{cid},
+            </if>
+        </set>
+        WHERE id =#{id}
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.String">
+        DELETE FROM book
+        WHERE id=#{id}
+    </delete>
+
+    <select id="listByCategory" parameterType="java.lang.Integer" resultType="Book">
+        SELECT <include refid="bookColumn"/> FROM book
+        WHERE cid=#{cid}
+        ORDER BY createDate DESC
+    </select>
+
+    <select id="findAllByTitleLikeOrAuthorLike" parameterType="java.lang.String" resultType="Book">
+        SELECT <include refid="bookColumn"/> FROM BOOK
+        WHERE title like '%'#{keywords}'%'
+        OR author like '%'#{keywords}'%'
+        ORDER BY createDate DESC
+    </select>
+</mapper>

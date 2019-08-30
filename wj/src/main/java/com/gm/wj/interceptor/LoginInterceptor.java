@@ -1,7 +1,7 @@
 package com.gm.wj.interceptor;
 
 
-import com.gm.wj.pojo.User;
+import com.gm.wj.model.User;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;

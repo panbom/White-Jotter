@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.gm.wj.dao.CategoryMapper">
+    <select id="findAll" resultType="Category">
+        SELECT id,name FROM category
+        ORDER BY id DESC
+    </select>
+    <select id="findById" parameterType="java.lang.Integer" resultType="Category">
+        SELECT id,name FROM category
+        WHERE id=#{id}
+    </select>
+    <insert id="insert" parameterType="Category">
+        INSERT INTO category VALUES
+        (#{name})
+    </insert>
+    <update id="update" parameterType="Category">
+        UPDATE category SET
+        name=#{name}
+        WHERE id=#{id}
+    </update>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        DELETE FROM category
+        WHERE id=#{id}
+    </delete>
+</mapper>

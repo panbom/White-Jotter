@@ -1,6 +1,8 @@
-package com.gm.wj.service;
+package com.gm.wj.dao;
 
 import com.gm.wj.model.Category;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -11,15 +13,15 @@ import java.util.List;
  * @Description TODO
  * @createTime 2019年08月30日 14:23:00
  */
-public interface CategoryService {
-
+@Component
+public interface CategoryMapper {
     List<Category> findAll();
 
-    Category findById(Integer id);
+    Category findById(@Param("id")Integer id);
 
     int insert(Category category);
 
     int update(Category category);
 
-    void deleteById(Integer id);
+    void deleteById(@Param("id")Integer id);
 }

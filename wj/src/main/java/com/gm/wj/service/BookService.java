@@ -1,41 +1,25 @@
 package com.gm.wj.service;
 
-import com.gm.wj.dao.BookDAO;
-import com.gm.wj.pojo.Book;
-import com.gm.wj.pojo.Category;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
-
+import com.gm.wj.model.Book;
 import java.util.List;
+/**
+ * @author panbo
+ * @version 1.0.0
+ * @ClassName BookServiceImpl.java
+ * @Description TODO
+ * @createTime 2019年08月30日 14:23:00
+ */
+public interface BookService {
 
-@Service
-public class BookService {
-    @Autowired
-    BookDAO bookDAO;
-    @Autowired
-    CategoryService categoryService;
+    public List<Book> findAll();
 
-    public List<Book> list() {
-        Sort sort = new Sort(Sort.Direction.DESC, "id");
-        return bookDAO.findAll(sort);
-    }
+    public int save(Book book);
 
-    public void addOrUpdate(Book book) {
-        bookDAO.save(book);
-    }
+    public int update(Book book);
 
-    public void deleteById(int id) {
-        bookDAO.deleteById(id);
-    }
+    public void deleteById(int id);
 
-    public List<Book> listByCategory(int cid) {
-        Category category = categoryService.get(cid);
-        Sort sort = new Sort(Sort.Direction.DESC, "id");
-        return bookDAO.findAllByCategory(category);
-    }
+    public List<Book> listByCategory(int cid);
 
-    public List<Book> Search(String keywords) {
-        return bookDAO.findAllByTitleLikeOrAuthorLike('%' + keywords + '%', '%' + keywords + '%');
-    }
+    public List<Book> findAllByTitleLikeOrAuthorLike(String keywords);
 }

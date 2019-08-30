@@ -1,32 +1,18 @@
 package com.gm.wj.service;
 
-import com.gm.wj.dao.UserDAO;
-import com.gm.wj.pojo.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
-@Service
-public class UserService {
-    @Autowired
-    UserDAO userDAO;
+import com.gm.wj.model.User;
 
-    public boolean isExist(String username) {
-        User user = getByName(username);
-        return null!=user;
-    }
+/**
+ * @author panbo
+ * @version 1.0.0
+ * @ClassName BookServiceImpl.java
+ * @Description TODO
+ * @createTime 2019年08月30日 14:23:00
+ */
+public interface UserService {
+    public User findByUsername(String username);
 
-    public User getByName(String username) {
-        return userDAO.findByUsername(username);
-    }
+    public User getByUsernameAndPassword(String username, String password);
 
-    public User get(String username, String password){
-        return userDAO.getByUsernameAndPassword(username, password);
-    }
-
-    public void add(User user) {
-        userDAO.save(user);
-    }
+    public int add(User user);
 }

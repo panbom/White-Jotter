@@ -1,10 +1,8 @@
 package com.gm.wj.config;
 
 import com.gm.wj.interceptor.LoginInterceptor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.Ordered;
 import org.springframework.web.servlet.config.annotation.*;
 
 @SpringBootConfiguration

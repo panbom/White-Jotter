@@ -24,7 +24,7 @@ CREATE TABLE `book` (
   `cover` varchar(255) DEFAULT '',
   `title` varchar(255) NOT NULL DEFAULT '',
   `author` varchar(255) DEFAULT '',
-  `date` varchar(20) DEFAULT '',
+  `createDate` varchar(20) DEFAULT '',
   `press` varchar(255) DEFAULT '',
   `abs` varchar(255) DEFAULT NULL,
   `cid` int(11) DEFAULT NULL,

@@ -1,7 +1,7 @@
 package com.gm.wj.controller;
 
-import com.gm.wj.pojo.Book;
-import com.gm.wj.pojo.Search;
+import com.gm.wj.model.Book;
+import com.gm.wj.model.Search;
 import com.gm.wj.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,13 +20,12 @@ public class LibraryController {
 
     @GetMapping("/api/books")
     public List<Book> list() throws Exception {
-        return bookService.list();
+        return bookService.findAll();
     }
 
     @PostMapping("/api/books")
     public Book addOrUpdate(@RequestBody Book book) throws Exception {
-        System.out.println(book.getCategory());
-        bookService.addOrUpdate(book);
+        bookService.save(book);
         return book;
     }
 
@@ -38,9 +37,9 @@ public class LibraryController {
     @PostMapping("/api/search")
     public List<Book> searchResult(@RequestBody Search s) throws Exception {
         if ("".equals(s.getKeywords())) {
-            return bookService.list();
+            return bookService.findAll();
         } else {
-            return bookService.Search(s.getKeywords());
+            return bookService.findAllByTitleLikeOrAuthorLike(s.getKeywords());
         }
     }
 
@@ -63,9 +62,7 @@ public class LibraryController {
         if (!f.getParentFile().exists())
             f.getParentFile().mkdirs();
         try {
-            file.transferTo(f);
-//            System.out.println(file.getOriginalFilename());
-//            System.out.println("http://localhost:8443/api/file/" + f.getName());
+            file.transferTo(f);;
             String imgURL = "http://localhost:8443/api/file/" + f.getName();
             return imgURL;
         } catch (IOException e) {

@@ -1,21 +1,19 @@
-package com.gm.wj.pojo;
+package com.gm.wj.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
+/**
+ * @author panbo
+ * @version 1.0.0
+ * @ClassName BookServiceImpl.java
+ * @Description TODO
+ * @createTime 2019年08月30日 14:23:00
+ */
+public class User implements Serializable {
+    private static final long serialVersionUID = -4850149512588906286L;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "user")
-@JsonIgnoreProperties({"handler","hibernateLazyInitializer"})
-
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    int id;
-
-    String username;
-    String password;
+    private int id;
+    private String username;
+    private String password;
 
     public int getId() {
         return id;
